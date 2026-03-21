@@ -1,0 +1,32 @@
+{
+  "source": "tradingview-screener",
+  "market": "egypt",
+  "updated_at_utc": "2026-03-14T13:37:18.111862+00:00",
+  "active_count": 233,
+  "dormant_count": 19,
+  "missing_in_config": [],
+  "missing_in_tv": [
+    "CPME",
+    "DCCC",
+    "DEIN",
+    "EGREF",
+    "EGS632D1C010",
+    "EGS72351C017",
+    "EGS72L31C011",
+    "EGWA",
+    "GEOS",
+    "GPPL",
+    "HAVC",
+    "HDST",
+    "KORA",
+    "MEGM",
+    "MISR",
+    "MMAT",
+    "NDRL",
+    "POCO",
+    "SAIB",
+    "SEIGA",
+    "SPHT"
+  ],
+  "csv_path": "E:\\Progs\\void\\FINance\\data\\egx_symbols.csv"
+}

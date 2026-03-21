@@ -1,0 +1,236 @@
+Symbol,High,Low,Close,Buy/Sell,Strategies,Confidence,Advice
+RMDA,4.58,4.28,4.32,NONE,,,No active signals.
+COMI,121.28,116.5,117.2,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+AMOC,9.64,9.13,9.2,SELL,Swing Trading,0.6,Consider exit/avoid; confirm risk rules.
+ABUK,87.95,82.5,86.67,MIXED,"Price Action, Swing Trading",0.62,Mixed signals; wait for clarity.
+CCAP,3.74,3.59,3.61,NONE,,,No active signals.
+MFPC,45.08,42.84,43.2,SELL,Swing Trading,0.6,Consider exit/avoid; confirm risk rules.
+EGAL,309.83,296,299.5,SELL,Swing Trading,0.6,Consider exit/avoid; confirm risk rules.
+FWRY,17.07,16.45,16.7,NONE,,,No active signals.
+TMGH,77.95,73.73,73.81,SELL,Swing Trading,0.8,Consider exit/avoid; confirm risk rules.
+ORHD,25.39,24.32,24.55,NONE,,,No active signals.
+VLMRA,34.09,32.51,32.67,SELL,Swing Trading,0.6,Consider exit/avoid; confirm risk rules.
+HRHO,25.77,24.7,25.02,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+ORAS,465,454.51,458,NONE,,,No active signals.
+GBCO,24.79,23.92,24.05,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+ISPH,10.48,10.13,10.23,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+ETEL,83.47,80.52,81,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+ALCN,32.75,31.17,32,MIXED,"Price Action, Swing Trading",0.62,Mixed signals; wait for clarity.
+RAYA,5.26,5.02,5.1,NONE,,,No active signals.
+HELI,5.52,5.29,5.29,NONE,,,No active signals.
+SKPC,18.22,17.4,17.51,NONE,,,No active signals.
+EGCH,12.2,11.92,12,NONE,,,No active signals.
+ADIB,38.78,37.4,37.5,NONE,,,No active signals.
+BTFH,2.88,2.82,2.84,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+GOUR,11.53,10.61,10.96,NONE,,,No active signals.
+CSAG,28.8,27.62,28.06,NONE,,,No active signals.
+MPCI,157.57,151.21,152.98,NONE,,,No active signals.
+MASR,5.47,5.28,5.31,NONE,,,No active signals.
+ARAB,0.225,0.216,0.221,SELL,Swing Trading,0.6,Consider exit/avoid; confirm risk rules.
+ZMID,5.42,5.19,5.22,NONE,,,No active signals.
+EALR,375,357.01,367.11,NONE,,,No active signals.
+ISMQ,7.48,7.21,7.21,NONE,,,No active signals.
+GGRN,2.36,2.21,2.27,NONE,,,No active signals.
+ACAMD,1.98,1.85,1.89,NONE,,,No active signals.
+DSCW,1.79,1.76,1.78,NONE,,,No active signals.
+ENGC,32.99,32.02,32.5,NONE,,,No active signals.
+ZEOT,8.45,8.26,8.41,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+PHDC,8.64,8.1,8.2,MIXED,"Mean Reversion, Position Trading",0.8,Mixed signals; wait for clarity.
+HDBK,114.98,111.6,112.46,NONE,,,No active signals.
+EFID,28.19,27.02,27.69,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+OIH,1.23,1.21,1.23,NONE,,,No active signals.
+EFIH,18.87,17.88,18.25,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+MICH,35.84,34,34.11,NONE,,,No active signals.
+JUFO,26.75,25.81,26,SELL,Swing Trading,0.8,Consider exit/avoid; confirm risk rules.
+EFIC,219.89,215.01,218.84,BUY,Price Action,0.7,Consider entry; confirm risk rules.
+EGS72XL1C014,0.087,0.084,0.086,NONE,,,No active signals.
+AMER,1.8,1.76,1.8,NONE,,,No active signals.
+SIPC,3.28,3.18,3.2,NONE,,,No active signals.
+ARCC,47.88,45.51,45.7,BUY,"Mean Reversion, Swing Trading",0.72,Consider entry; confirm risk rules.
+ATLC,4.67,4.51,4.57,SELL,Swing Trading,0.6,Consider exit/avoid; confirm risk rules.
+AALR,173,164.21,164.96,NONE,,,No active signals.
+BINV,39.8,38.4,38.61,NONE,,,No active signals.
+CIEB,23.12,22.14,22.38,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+SCEM,57.9,56.65,56.65,NONE,,,No active signals.
+MTIE,7.7,7.52,7.54,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+UEGC,1.38,1.33,1.34,NONE,,,No active signals.
+OBRI,37.5,35,35.1,NONE,,,No active signals.
+HBCO,7.55,7.11,7.16,NONE,,,No active signals.
+KRDI,0.633,0.619,0.621,NONE,,,No active signals.
+WKOL,287,279.5,280,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+POUL,32,30.13,30.44,NONE,,,No active signals.
+ALUM,21.14,20,20.14,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+EAST,37.29,36.57,37.1,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+ETRS,7.59,7.11,7.2,NONE,,,No active signals.
+OLFI,21.68,21.4,21.41,NONE,,,No active signals.
+MHOT,26.03,25.18,25.3,NONE,,,No active signals.
+RACC,8.58,8.33,8.37,NONE,,,No active signals.
+PHAR,79.53,78.1,78.53,NONE,,,No active signals.
+NIPH,96.69,95.02,95.11,NONE,,,No active signals.
+MPCO,1.54,1.5,1.51,NONE,,,No active signals.
+ORWE,22.63,22.01,22.1,NONE,,,No active signals.
+LCSW,24.37,23.6,23.9,BUY,"Price Action, Swing Trading",0.62,Consider entry; confirm risk rules.
+AIDC,0.468,0.457,0.458,NONE,,,No active signals.
+EXPA,16.23,15.9,16,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+AMIA,5.37,5.16,5.33,MIXED,"Price Action, Swing Trading",0.62,Mixed signals; wait for clarity.
+MCRO,1.36,1.32,1.33,NONE,,,No active signals.
+DAPH,74.97,73.11,73.51,NONE,,,No active signals.
+SDTI,39.28,37.6,37.63,NONE,,,No active signals.
+ICFC,15.65,15.2,15.4,NONE,,,No active signals.
+TAQA,13.06,12.78,12.88,NONE,,,No active signals.
+CLHO,12.84,12.5,12.5,NONE,,,No active signals.
+GRCA,55.77,54.11,55.07,SELL,Swing Trading,0.6,Consider exit/avoid; confirm risk rules.
+MBSC,274,267,270,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+SUGR,48.5,47.26,48.21,BUY,"Price Action, Swing Trading",0.75,Consider entry; confirm risk rules.
+ELEC,2.09,2.05,2.06,NONE,,,No active signals.
+MPRC,26.69,25.8,26.49,MIXED,"Mean Reversion, Price Action",0.62,Mixed signals; wait for clarity.
+BONY,4.23,4.02,4.03,NONE,,,No active signals.
+PRMH,2.09,1.97,1.99,NONE,,,No active signals.
+SWDY,79,77.61,78,NONE,,,No active signals.
+SCFM,238.99,220.1,223.82,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+ATQA,8.34,8.11,8.21,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+EMFD,9.13,8.99,9,NONE,,,No active signals.
+MCQE,183.67,178.31,178.9,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+OCDI,17.93,17.45,17.53,SELL,Swing Trading,0.8,Consider exit/avoid; confirm risk rules.
+SVCE,7.68,7.31,7.39,NONE,,,No active signals.
+SNFC,10.44,10.25,10.32,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+VALU,10.35,10.08,10.12,NONE,,,No active signals.
+ELWA,1.67,1.58,1.61,SELL,Swing Trading,0.6,Consider exit/avoid; confirm risk rules.
+CERA,1.08,1.03,1.04,NONE,,,No active signals.
+COSG,1.34,1.31,1.32,NONE,,,No active signals.
+ASCM,41,39.88,39.98,NONE,,,No active signals.
+EGAS,42.9,41.25,41.5,NONE,,,No active signals.
+CRST,0.574,0.54,0.552,NONE,,,No active signals.
+EHDR,2.08,2.04,2.05,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+QNBE,39.59,39.01,39.1,BUY,"Mean Reversion, Price Action",0.75,Consider entry; confirm risk rules.
+AIH,0.325,0.316,0.322,NONE,,,No active signals.
+SAUD,18.4,18,18,MIXED,"Price Action, Swing Trading",0.65,Mixed signals; wait for clarity.
+KZPC,9.98,9.81,9.84,NONE,,,No active signals.
+EGS385S1C012,80.86,77,77.28,NONE,,,No active signals.
+ACTF,2.65,2.6,2.61,NONE,,,No active signals.
+MEPA,1.53,1.48,1.49,NONE,,,No active signals.
+ODIN,1.78,1.73,1.74,NONE,,,No active signals.
+MOED,0.877,0.841,0.868,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+SPIN,14.2,13.86,13.99,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+ANFI,100,96.81,97.07,NONE,,,No active signals.
+IBCT,10.78,10.49,10.54,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+OFH,0.527,0.517,0.52,NONE,,,No active signals.
+DTPP,109.3,97.68,107.06,MIXED,"Mean Reversion, Position Trading",0.8,Mixed signals; wait for clarity.
+GDWA,0.771,0.76,0.762,NONE,,,No active signals.
+EGS370O1C013,21.79,20.67,20.99,NONE,,,No active signals.
+AFMC,58.85,56.5,57.05,NONE,,,No active signals.
+GPIM,0.78,0.7,0.711,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+PRCL,15.19,14.91,14.94,NONE,,,No active signals.
+EPCO,8.32,7.96,8,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+IEEC,0.415,0.403,0.405,NONE,,,No active signals.
+IRON,31.5,31.01,31.04,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+UNIP,0.27,0.265,0.266,NONE,,,No active signals.
+ELSH,7.04,6.87,6.91,NONE,,,No active signals.
+TANM,4.4,4.32,4.35,NONE,,,No active signals.
+ARVA,8.27,7.76,7.95,NONE,,,No active signals.
+GGCC,0.552,0.53,0.532,NONE,,,No active signals.
+RREI,2.39,2.33,2.34,NONE,,,No active signals.
+AIFI,1.75,1.69,1.7,NONE,,,No active signals.
+AFDI,32.8,32.1,32.67,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+DGTZ,2.9,2.78,2.79,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+EEII,1.84,1.77,1.8,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+AMES,46.94,45.31,45.78,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+AREH,1.09,1.06,1.07,NONE,,,No active signals.
+NARE,8.39,8.12,8.13,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+NINH,12.95,12.15,12.34,NONE,,,No active signals.
+IFAP,18.87,18.2,18.59,MIXED,"Position Trading, Price Action",0.7,Mixed signals; wait for clarity.
+KWIN,55.99,54.08,54.83,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+CANA,41,40.04,40.4,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+COPR,0.31,0.303,0.304,NONE,,,No active signals.
+MILS,106.9,101.36,102.67,NONE,,,No active signals.
+ACGC,7.91,7.61,7.67,NONE,,,No active signals.
+ADCI,153.88,148.1,148.13,NONE,,,No active signals.
+ISMA,13.37,12.75,12.79,NONE,,,No active signals.
+TWSA,7.09,6,7,SELL,"Mean Reversion, Swing Trading",0.72,Consider exit/avoid; confirm risk rules.
+GIHD,36,34.3,34.49,NONE,,,No active signals.
+ELKA,1.12,1.07,1.08,NONE,,,No active signals.
+NCCW,4.5,4.39,4.43,BUY,"Price Action, Swing Trading",0.62,Consider entry; confirm risk rules.
+ADRI,5.11,4.45,5.09,SELL,Mean Reversion,0.85,Consider exit/avoid; confirm risk rules.
+ADPC,3.58,3.46,3.48,NONE,,,No active signals.
+ECAP,26.2,25.15,25.43,NONE,,,No active signals.
+IDRE,33.58,32.4,32.5,NONE,,,No active signals.
+SPMD,0.338,0.333,0.334,NONE,,,No active signals.
+EGTS,7.24,7.12,7.21,NONE,,,No active signals.
+ICMI,11.48,10.93,11,NONE,,,No active signals.
+ROTO,27.89,27.33,27.53,BUY,"Price Action, Swing Trading",0.62,Consider entry; confirm risk rules.
+INEG,0.473,0.451,0.457,NONE,,,No active signals.
+MBEG,4.13,4.05,4.05,NONE,,,No active signals.
+INFI,91.25,87.02,88.16,NONE,,,No active signals.
+LUTS,0.536,0.525,0.529,NONE,,,No active signals.
+MAAL,3.94,3.81,3.9,BUY,Price Action,0.7,Consider entry; confirm risk rules.
+BIGP,0.173,0.167,0.168,SELL,"Position Trading, Price Action",0.72,Consider exit/avoid; confirm risk rules.
+CCRS,1.34,1.3,1.31,NONE,,,No active signals.
+CNFN,4.07,3.99,4,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+TALM,15.34,14.8,15.19,NONE,,,No active signals.
+EBSC,1.63,1.57,1.59,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+FAIT,33.97,33.09,33.8,NONE,,,No active signals.
+GTWL,43.5,41.53,42.25,NONE,,,No active signals.
+CAED,55,53.7,53.93,SELL,Position Trading,0.75,Consider exit/avoid; confirm risk rules.
+SMFR,178.15,174,174,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+FIRE,2.45,2.34,2.45,SELL,"Mean Reversion, Position Trading, Swing Trading",0.73,Consider exit/avoid; confirm risk rules.
+ACAP,7.72,7.47,7.58,NONE,,,No active signals.
+NHPS,61,59.71,59.72,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+CICH,10.98,10.31,10.52,NONE,,,No active signals.
+FTNS,1.23,1.2,1.22,BUY,"Price Action, Swing Trading",0.62,Consider entry; confirm risk rules.
+PRDC,4.17,4.05,4.07,NONE,,,No active signals.
+AXPH,805,795.37,799.96,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+EASB,3.03,2.91,2.98,BUY,Price Action,0.7,Consider entry; confirm risk rules.
+UTOP,133.49,120.15,120.15,NONE,,,No active signals.
+ASPI,0.288,0.277,0.279,NONE,,,No active signals.
+AMPI,2.72,2.59,2.65,SELL,Position Trading,0.75,Consider exit/avoid; confirm risk rules.
+FNAR,8.5,7.08,8.39,SELL,"Mean Reversion, Swing Trading",0.72,Consider exit/avoid; confirm risk rules.
+UEFM,474,450,450.08,NONE,,,No active signals.
+CIRA,17.6,17.04,17.2,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+UBEE,13.59,13.29,13.44,NONE,,,No active signals.
+RAKT,23.77,22.64,23.77,NONE,,,No active signals.
+KABO,6.05,5.86,5.91,SELL,Position Trading,0.75,Consider exit/avoid; confirm risk rules.
+VERT,5.85,5.15,5.66,SELL,"Mean Reversion, Swing Trading",0.72,Consider exit/avoid; confirm risk rules.
+APSW,8.03,7.86,7.9,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+EPPK,13.24,12.3,12.8,SELL,"Mean Reversion, Price Action, Swing Trading",0.7,Consider exit/avoid; confirm risk rules.
+SEIG,145.37,140.02,141.63,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+RTVC,3.56,3.5,3.54,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+BIOC,62.1,60.11,60.97,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+MENA,4.79,4.64,4.64,NONE,,,No active signals.
+AJWA,128.28,110.49,126.49,BUY,"Mean Reversion, Position Trading, Price Action",0.77,Consider entry; confirm risk rules.
+CEFM,88,84.44,85.99,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+SCTS,269.98,261.12,263,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+RUBX,9.07,8.8,8.99,BUY,Price Action,0.65,Consider entry; confirm risk rules.
+MIPH,467,422.5,450,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+CPCI,252.5,250.04,251,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+MOSC,157,151.01,151.01,NONE,,,No active signals.
+MFSC,31.65,30.6,31.15,BUY,"Position Trading, Price Action",0.7,Consider entry; confirm risk rules.
+GSSC,226.9,221,222.13,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+EDFM,300,297,299,NONE,,,No active signals.
+BIDI,1.32,1.26,1.32,BUY,Position Trading,0.75,Consider entry; confirm risk rules.
+DOMT,24.24,23.5,23.75,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+ELNA,40,38.16,38.36,NONE,,,No active signals.
+MKIT,3.19,3,3.13,BUY,Price Action,0.7,Consider entry; confirm risk rules.
+OCPH,191.85,190.26,190.4,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+ICID,3.65,3.55,3.55,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+WCDF,505,495,495.04,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+MOIN,22.85,22.52,22.6,NONE,,,No active signals.
+UNIT,10,9.8,9.8,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+UPMS,9.15,8.6,8.6,NONE,,,No active signals.
+NEDA,2.2,2.17,2.17,NONE,,,No active signals.
+PHTV,184,180.5,181.5,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+GMCI,1.72,1.56,1.61,NONE,,,No active signals.
+MOIL,0.428,0.415,0.415,NONE,,,No active signals.
+EGBE,0.38,0.374,0.38,BUY,Price Action,0.7,Consider entry; confirm risk rules.
+FAITA,1.02,1.01,1.01,NONE,,,No active signals.
+VLMR,0.709,0.705,0.706,NONE,,,No active signals.
+EGS3E071C013,105,100,105,BUY,Price Action,0.7,Consider entry; confirm risk rules.
+RKAZ,2.65,2.48,2.53,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+CFGH,0.107,0.102,0.105,SELL,Price Action,0.7,Consider exit/avoid; confirm risk rules.
+NAHO,0.111,0.11,0.11,NONE,,,No active signals.
+EOSB,1.2,1.13,1.2,MIXED,"Mean Reversion, Swing Trading",0.82,Mixed signals; wait for clarity.
+EGSA,7.15,6.99,7.1,BUY,Price Action,0.7,Consider entry; confirm risk rules.
+GTEX,0.034,0.033,0.034,BUY,Price Action,0.7,Consider entry; confirm risk rules.
+TRTO,0.031,0.031,0.031,NONE,,,No active signals.
+ICLE,15.76,15.76,15.76,BUY,Swing Trading,0.6,Consider entry; confirm risk rules.
+,,,,,,,
+,,,,,,,
