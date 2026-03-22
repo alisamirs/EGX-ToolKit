@@ -77,7 +77,7 @@ Override with `EGX_DATA_DIR`.
 #### Option 1: Command Line Interface (CLI)
 
 ```bash
-python app.py --limit 5 --days 90
+egx-toolkit --limit 5 --days 90
 ```
 
 **What it does:**
