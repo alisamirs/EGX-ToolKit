@@ -30,25 +30,8 @@ Note: `reportlab` is required for PDF export and `openpyxl` is required for Exce
 
 ### Setup
 
-Recommended (pipx):
-
 ```bash
-pipx install git+https://github.com/alisamirs/-EGX-ToolKit-Beta.git
-egx-toolkit --help
-```
-
-Extras (optional):
-
-```bash
-pipx install "egx-toolkit[ui]"   # Streamlit dashboard
-pipx install "egx-toolkit[sync]" # TradingView symbol sync
-pipx install "egx-toolkit[pdf]"  # PDF export
-```
-
-Alternative (pip):
-
-```bash
-pip install git+https://github.com/alisamirs/-EGX-ToolKit-Beta.git
+pip install git+https://github.com/alisamirs/EGX-ToolKit.git
 egx-toolkit --help
 ```
 
