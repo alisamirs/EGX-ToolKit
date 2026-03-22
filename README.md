@@ -1,4 +1,4 @@
-# Finance Application - EGX Trading Strategy Analysis System
+﻿# Finance Application - EGX Trading Strategy Analysis System
 
 ## Overview
 
@@ -8,68 +8,63 @@ A comprehensive Python-based trading strategy analysis system for Egyptian Stock
 
 ```
 EGX ToolKit/
-├── config.py              # Configuration and constants
-├── database.py            # DuckDB operations and data persistence
-├── data_fetcher.py        # Data fetching from external sources
-├── strategies.py          # Trading strategy implementations
-├── analysis.py            # Signal aggregation and market analysis
-├── app.py                 # Main CLI application
-├── dashboard.py           # Streamlit web dashboard
-├── requirements.txt       # Python dependencies
-└── data/                  # Data directory (created at runtime)
-    └── stocks.duckdb      # Local DuckDB database file
+â”œâ”€â”€ config.py              # Configuration and constants
+â”œâ”€â”€ database.py            # DuckDB operations and data persistence
+â”œâ”€â”€ data_fetcher.py        # Data fetching from external sources
+â”œâ”€â”€ strategies.py          # Trading strategy implementations
+â”œâ”€â”€ analysis.py            # Signal aggregation and market analysis
+â”œâ”€â”€ app.py                 # Main CLI application
+â”œâ”€â”€ dashboard.py           # Streamlit web dashboard
+â”œâ”€â”€ requirements.txt       # Python dependencies
+â””â”€â”€ data/                  # Data directory (created at runtime)
+    â””â”€â”€ stocks.duckdb      # Local DuckDB database file
 ```
-
-## Features
-
-### Phase 1: Core Architecture
-- **Database Engine**: DuckDB for persistent, analytical storage
-- **Auto-Load Logic**: Syncs missing data on launch
-- **Modular Design**: Clean separation of concerns
-
-### Phase 2: Trading Strategies
-
-| Strategy | Logic | Recommendation |
-|----------|-------|-----------------|
-| **Swing Trading** | 20/50 EMA Cross + RSI | Buy on bullish cross |
-| **Position Trading** | 200-day SMA tracking | Long-term value plays |
-| **Algorithmic (Mean Reversion)** | Bollinger Bands | Buy at lower band |
-| **Price Action** | Engulfing/Hammer patterns | Chart pattern signals |
-| **Day Trading** | Intraday VWAP analysis | Pre-close exits |
-| **Scalping** | 1-5 min micro trends | High-liquidity stocks |
-
-### Phase 3: Technical Implementation
-- **Modularity**: Each strategy is an independent class
-- **Data Handling**: Pandas for efficient data transformation
-- **DuckDB Integration**: SQL-based data access layer
-- **Data Source Abstraction**: Easy switching between data sources
-
-### Phase 4: Dashboard & Recommendations
-- **Market Sentiment**: Bullish/bearish gauge
-- **Golden List**: Stocks with 3+ simultaneous signals
-- **Strategy-Specific Advice**: Tailored recommendations
-- **Daily Market Memo**: Overall market assessment
 
 ## Installation
 
 ### Requirements
-- Python 3.9+
+- Python 3.9+ (including 3.13)
 - DuckDB 1.1.3+
 - Pandas 2.1.4+
 Note: `reportlab` is required for PDF export and `openpyxl` is required for Excel export.
 
 ### Setup
 
+Recommended (pipx):
+
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the application
-python app.py
-
-# Or run the Streamlit dashboard
-streamlit run dashboard.py
+pipx install git+https://github.com/alisamirs/-EGX-ToolKit-Beta.git
+egx-toolkit --help
 ```
+
+Extras (optional):
+
+```bash
+pipx install "egx-toolkit[ui]"   # Streamlit dashboard
+pipx install "egx-toolkit[sync]" # TradingView symbol sync
+pipx install "egx-toolkit[pdf]"  # PDF export
+```
+
+Alternative (pip):
+
+```bash
+pip install git+https://github.com/alisamirs/-EGX-ToolKit-Beta.git
+egx-toolkit --help
+```
+
+If you want PDF export, install the optional dependency:
+
+```bash
+pip install "egx-toolkit[pdf]"
+```
+
+To enable TradingView symbol sync and the Streamlit dashboard:
+
+```bash
+pip install "egx-toolkit[ui]"
+pip install "egx-toolkit[sync]"
+```
+
 
 ## Configuration
 
@@ -94,64 +89,64 @@ RSI_OVERBOUGHT = 70
 RSI_OVERSOLD = 30
 ```
 
-## Usage
+Data directory defaults to a per-user location:
 
-### CLI Application
+- Windows: `%APPDATA%\\egx-toolkit`
+- Linux: `~/.local/share/egx-toolkit`
 
-```python
-from app import FinanceApp
+Override with `EGX_DATA_DIR`.
 
-# Initialize
-app = FinanceApp()
+## Usage & Quick Start
 
-# Run analysis on specific symbols
-app.run_analysis_pipeline(symbols=['COMI', 'ABUK', 'EHDR'], days=365)
+### Running the Application
 
-# Display dashboard
-app.display_dashboard()
+#### Option 1: Command Line Interface (CLI)
 
-# Clean up
-app.close()
+```bash
+python app.py --limit 5 --days 90
 ```
 
-### Streamlit Dashboard
+**What it does:**
+- Fetches data for 5 test symbols
+- Runs all trading strategies
+- Displays a market summary with:
+  - Market sentiment percentage
+  - Golden list (stocks with 3+ signal triggers)
+  - Top high-confidence recommendations
+  - Market memo
+
+**Output example:**
+```
+Starting analysis pipeline...
+[1/5] Processing ABUK...
+  Found 332 signals
+...
+Analysis complete.
+
+============================================================
+          FINANCE DASHBOARD SUMMARY
+============================================================
+Market Sentiment: 50.0%
+Market Memo: Market is slightly bearish...
+🌟 GOLDEN LIST (3+ Strategy Signals):
+  (Results will appear when available)
+...
+```
+
+#### Option 2: Streamlit Web Dashboard
 
 ```bash
 streamlit run dashboard.py
 ```
 
-Features:
-- Real-time market sentiment
+**Features:**
+- Interactive web interface
+- Real-time market sentiment gauge
 - Golden list visualization
-- High-confidence signal display
-- Market memo and recommendations
+- Signal recommendations
+- Market analysis
 
-## Data Flow
-
-1. **Data Loading**: Fetches stock data from TradingView only
-2. **Persistence**: Stores in local DuckDB database
-3. **Indicator Calculation**: Computes EMA, SMA, RSI, Bollinger Bands
-4. **Signal Generation**: Each strategy generates BUY/SELL signals
-5. **Aggregation**: Combines signals across strategies
-6. **Analysis**: Identifies high-probability setups
-7. **Dashboard**: Displays recommendations and sentiment
-
-## Read-Only Mode & Snapshots
-
-The toolkit uses a single-writer pattern. When the writer finishes a run, it writes a stable snapshot database:
-
-```
-data/stocks.duckdb.snapshot
-```
-
-`--read-only` always opens the latest snapshot/backup and never touches the live DB.  
-If the writer is running, readers continue using the last completed snapshot.
-
-If no snapshot exists yet, `--read-only` will:
-1. Wait for a writer to finish and create one, or
-2. If no writer is running, it will run the pipeline once to create the snapshot, then exit.
-
-## CLI Flags
+### CLI Application
 
 Run:
 
@@ -225,49 +220,6 @@ strategies = {
 }
 ```
 
-### Switching Data Sources
-
-Edit `data_fetcher.py` to implement your own fetcher:
-
-```python
-class YourDataFetcher(DataFetcher):
-    def fetch_symbol_data(self, symbol, days=365):
-        # Your data fetching logic
-        pass
-```
-
-## API Reference
-
-### StockDatabase
-
-```python
-db = StockDatabase()
-db.create_tables()
-db.insert_stock_data(symbol, date, open, high, low, close, volume)
-data = db.get_symbol_data(symbol, days)
-latest_date = db.get_latest_date_for_symbol(symbol)
-db.close()
-```
-
-### AnalysisEngine
-
-```python
-engine = AnalysisEngine(db)
-sentiment = engine.get_market_sentiment(date)
-golden_list = engine.get_golden_list(min_signals=3, date)
-recommendations = engine.get_strategy_recommendations(date)
-memo = engine.generate_market_memo(sentiment)
-```
-
-### StrategyEngine
-
-```python
-from strategies import SwingTradingStrategy
-strategy = SwingTradingStrategy(dataframe)
-signals = strategy.generate_signals()
-# signals: List[dict] with keys: date, signal, confidence
-```
-
 ## EGX Symbols Supported
 
 200+ stocks including:
@@ -275,14 +227,7 @@ signals = strategy.generate_signals()
 - ADIB, ADCO, ASEC (Blue chips)
 - And many more...
 
-See `config.EGX_SYMBOLS` for complete list.
-
-## Performance Considerations
-
-- **Database**: DuckDB is optimized for analytical queries
-- **Caching**: Data is persisted to avoid redundant fetches
-- **Scalability**: Efficient for 95+ stocks with 365+ days history
-- **Memory**: Streamlined with pandas/numpy operations
+See `EGX_SYMBOLS` in config.py for complete list.
 
 ## Future Enhancements
 
@@ -292,10 +237,6 @@ See `config.EGX_SYMBOLS` for complete list.
 - [ ] Risk management overlays
 - [ ] Mobile app integration
 - [ ] Email/SMS notifications
-
-## License
-
-Proprietary - Trading System
 
 ## Support
 

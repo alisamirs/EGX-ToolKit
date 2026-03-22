@@ -2,14 +2,16 @@
 
 ## 📚 Documentation Files (Read These First)
 
-1. **QUICKSTART.md** - ⭐ START HERE
+1. **QUICKSTART.md** - Short Guide
    - Installation in 2 minutes
    - Run CLI or Streamlit dashboard
    - Customization examples
    - Troubleshooting tips
 
-2. **README.md** - Full Reference
+2. **README.md** - Full Reference & Quick Start
    - Complete API documentation
+   - Installation instructions
+   - Run CLI or Streamlit dashboard
    - Database schema details
    - Development guide
    - All supported features

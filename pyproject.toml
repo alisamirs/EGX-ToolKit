@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "egx-toolkit"
+version = "1.0.0"
+description = "EGX ToolKit - EGX Trading Strategy Analysis System"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "UNLICENSED" }
+dependencies = [
+  "duckdb>=1.4.3",
+  "pandas>=2.2.3",
+  "numpy>=2.1.2",
+  "plotly>=5.18.0",
+  "openpyxl>=3.1.2",
+  "platformdirs>=4.3.6",
+  "tvdatafeed-enhanced>=2.2.0"
+]
+
+[project.optional-dependencies]
+ui = [
+  "streamlit>=1.41.0"
+]
+sync = [
+  "lxml>=5.3.0",
+  "tradingview-screener>=3.0.0"
+]
+pdf = [
+  "reportlab>=4.2.2"
+]
+
+[project.scripts]
+egx-toolkit = "egx_toolkit.cli:main"
+
+[tool.setuptools]
+packages = ["egx_toolkit"]
+py-modules = [
+  "app",
+  "analysis",
+  "config",
+  "dashboard",
+  "data_fetcher",
+  "database",
+  "strategies",
+  "symbol_sync"
+]

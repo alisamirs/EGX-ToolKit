@@ -1,0 +1,4 @@
+recursive-exclude data *
+exclude *.duckdb
+exclude *.snapshot*
+exclude *.writer.lock

@@ -37,7 +37,7 @@ class TVDataFeedFetcher(DataFetcher):
             self.interval = Interval.in_daily
             self._cache = {}  # In-memory cache: {(symbol, days): dataframe}
         except ImportError:
-            raise ImportError("tvDatafeed not installed. Install with: pip install tvDatafeed")
+            raise ImportError("tvDatafeed not installed. Install with: pip install \"egx-toolkit[tv]\"")
     
     def fetch_symbol_data(self, symbol, days=365):
         """Fetch data from TradingView using tvDatafeed."""

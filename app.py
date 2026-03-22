@@ -371,7 +371,7 @@ def _build_fetcher_factory(source):
         return _factory
     raise SystemExit(f"Unknown data source: {source}")
 
-def _parse_args():
+def _parse_args(argv=None):
     parser = argparse.ArgumentParser(description="EGX trading strategy analysis")
     parser.add_argument(
         "--version",
@@ -470,7 +470,7 @@ def _parse_args():
         action="store_true",
         help="Delete the mock database file after the run (mock data source only)."
     )
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def _backup_database_file(db_path):
@@ -602,144 +602,149 @@ def _run_write_flow(app, args, symbols):
         app.display_dashboard()
 
 
-if __name__ == "__main__":
+def main(argv=None):
     is_streamlit = any("streamlit" in arg.lower() for arg in sys.argv) or "streamlit" in sys.modules
 
     if is_streamlit:
         # Allow "streamlit run app.py" to render the UI.
         import dashboard  # noqa: F401
-    else:
-        args, _unknown = _parse_args(), None
-        if args.version:
-            print(__version__)
-            sys.exit(0)
+        return 0
 
-        if args.about:
-            print(__about__)
-            sys.exit(0)
+    args, _unknown = _parse_args(argv), None
+    if args.version:
+        print(__version__)
+        return 0
 
-        fetcher_factory = _build_fetcher_factory(args.data_source)
+    if args.about:
+        print(__about__)
+        return 0
 
-        if args.list_symbols:
-            for s in EGX_SYMBOLS:
-                print(s)
-            sys.exit(0)
+    fetcher_factory = _build_fetcher_factory(args.data_source)
 
-        if args.sync_symbols_tv:
-            try:
-                result = sync_symbols_from_tradingview(EGX_SYMBOLS)
-                print(f"Synced {len(result.active_symbols)} active symbols to {result.csv_path}")
-                print(f"Dormant symbols removed: {len(result.dormant_symbols)}")
-                print(f"Missing in config: {len(result.missing_in_config)}")
-                print(f"Missing in TradingView: {len(result.missing_in_tv)}")
-                print(f"Report saved to: {result.report_path}")
-            except Exception as e:
-                print(f"Failed to sync symbols from TradingView: {e}")
-                sys.exit(1)
-            sys.exit(0)
+    if args.list_symbols:
+        for s in EGX_SYMBOLS:
+            print(s)
+        return 0
 
-        if args.symbols:
-            requested = [s.strip().upper() for s in args.symbols.split(",") if s.strip()]
-            if args.allow_unknown_symbols:
-                symbols = requested
-            else:
-                known = set(EGX_SYMBOLS)
-                allowed = set(EGX_SYMBOLS)
-                if EGX_INDEX_SYMBOL:
-                    allowed.add(EGX_INDEX_SYMBOL)
-
-                unknown = [s for s in requested if s not in allowed]
-                for s in unknown:
-                    print(f"Unknown symbol (not in EGX_SYMBOLS): {s}")
-
-                symbols = [s for s in requested if s in allowed]
-                if not symbols:
-                    print("No valid symbols to analyze. Exiting.")
-                    sys.exit(1)
-        elif args.limit:
-            symbols = EGX_SYMBOLS[:args.limit]
-        else:
-            symbols = None
-
-        mock_db_path = None
-        purge_mock_after = args.purge_mock_after
-        if args.data_source == "mock":
-            mock_db_path = DATA_DIR / "stocks_mock.duckdb"
-            if not args.purge_mock_after:
-                purge_mock_after = True
-
-        db_path_for_check = mock_db_path if mock_db_path else DB_PATH
-
-        if args.read_only and not _has_snapshot_or_backup(db_path_for_check):
-            if _try_acquire_writer_lock(db_path_for_check):
-                print("No snapshot found; running pipeline once to generate a snapshot.")
-                app = FinanceApp(
-                    fetcher_factory=fetcher_factory,
-                    purge_on_load=args.purge_symbols,
-                    db_path=mock_db_path,
-                    read_only=False
-                )
-                try:
-                    _run_write_flow(app, args, symbols)
-                finally:
-                    app.close()
-                sys.exit(0)
-
+    if args.sync_symbols_tv:
         try:
+            result = sync_symbols_from_tradingview(EGX_SYMBOLS)
+            print(f"Synced {len(result.active_symbols)} active symbols to {result.csv_path}")
+            print(f"Dormant symbols removed: {len(result.dormant_symbols)}")
+            print(f"Missing in config: {len(result.missing_in_config)}")
+            print(f"Missing in TradingView: {len(result.missing_in_tv)}")
+            print(f"Report saved to: {result.report_path}")
+        except Exception as e:
+            print(f"Failed to sync symbols from TradingView: {e}")
+            return 1
+        return 0
+
+    if args.symbols:
+        requested = [s.strip().upper() for s in args.symbols.split(",") if s.strip()]
+        if args.allow_unknown_symbols:
+            symbols = requested
+        else:
+            allowed = set(EGX_SYMBOLS)
+            if EGX_INDEX_SYMBOL:
+                allowed.add(EGX_INDEX_SYMBOL)
+
+            unknown = [s for s in requested if s not in allowed]
+            for s in unknown:
+                print(f"Unknown symbol (not in EGX_SYMBOLS): {s}")
+
+            symbols = [s for s in requested if s in allowed]
+            if not symbols:
+                print("No valid symbols to analyze. Exiting.")
+                return 1
+    elif args.limit:
+        symbols = EGX_SYMBOLS[:args.limit]
+    else:
+        symbols = None
+
+    mock_db_path = None
+    purge_mock_after = args.purge_mock_after
+    if args.data_source == "mock":
+        mock_db_path = DATA_DIR / "stocks_mock.duckdb"
+        if not args.purge_mock_after:
+            purge_mock_after = True
+
+    db_path_for_check = mock_db_path if mock_db_path else DB_PATH
+
+    if args.read_only and not _has_snapshot_or_backup(db_path_for_check):
+        if _try_acquire_writer_lock(db_path_for_check):
+            print("No snapshot found; running pipeline once to generate a snapshot.")
             app = FinanceApp(
                 fetcher_factory=fetcher_factory,
                 purge_on_load=args.purge_symbols,
                 db_path=mock_db_path,
-                read_only=args.read_only
+                read_only=False
             )
-        except Exception as e:
-            if not args.read_only:
-                print("Writer is busy. Falling back to read-only mode.")
-                args.read_only = True
-                app = FinanceApp(
-                    fetcher_factory=fetcher_factory,
-                    purge_on_load=args.purge_symbols,
-                    db_path=mock_db_path,
-                    read_only=True
-                )
+            try:
+                _run_write_flow(app, args, symbols)
+            finally:
+                app.close()
+            return 0
+
+    try:
+        app = FinanceApp(
+            fetcher_factory=fetcher_factory,
+            purge_on_load=args.purge_symbols,
+            db_path=mock_db_path,
+            read_only=args.read_only
+        )
+    except Exception:
+        if not args.read_only:
+            print("Writer is busy. Falling back to read-only mode.")
+            args.read_only = True
+            app = FinanceApp(
+                fetcher_factory=fetcher_factory,
+                purge_on_load=args.purge_symbols,
+                db_path=mock_db_path,
+                read_only=True
+            )
+        else:
+            raise
+
+    try:
+        if args.read_only:
+            if args.latest_table or args.export_csv or args.export_excel or args.export_pdf:
+                df = app.display_latest_table()
+                if args.export_csv:
+                    df.to_csv(args.export_csv, index=False)
+                    print(f"Exported CSV to {args.export_csv}")
+                if args.export_excel:
+                    df.to_excel(args.export_excel, index=False)
+                    print(f"Exported Excel to {args.export_excel}")
+                if args.export_pdf:
+                    try:
+                        from reportlab.lib import colors
+                        from reportlab.lib.pagesizes import letter, landscape
+                        from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+
+                        pdf = SimpleDocTemplate(args.export_pdf, pagesize=landscape(letter))
+                        data = [df.columns.tolist()] + df.astype(str).values.tolist()
+                        table = Table(data)
+                        table.setStyle(TableStyle([
+                            ("BACKGROUND", (0, 0), (-1, 0), colors.lightgrey),
+                            ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
+                            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                        ]))
+                        pdf.build([table])
+                        print(f"Exported PDF to {args.export_pdf}")
+                    except Exception as e:
+                        print(f"PDF export failed: {e}")
             else:
-                raise
-        
-        try:
-            if args.read_only:
-                if args.latest_table or args.export_csv or args.export_excel or args.export_pdf:
-                    df = app.display_latest_table()
-                    if args.export_csv:
-                        df.to_csv(args.export_csv, index=False)
-                        print(f"Exported CSV to {args.export_csv}")
-                    if args.export_excel:
-                        df.to_excel(args.export_excel, index=False)
-                        print(f"Exported Excel to {args.export_excel}")
-                    if args.export_pdf:
-                        try:
-                            from reportlab.lib import colors
-                            from reportlab.lib.pagesizes import letter, landscape
-                            from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+                app.display_dashboard()
+            return 0
 
-                            pdf = SimpleDocTemplate(args.export_pdf, pagesize=landscape(letter))
-                            data = [df.columns.tolist()] + df.astype(str).values.tolist()
-                            table = Table(data)
-                            table.setStyle(TableStyle([
-                                ("BACKGROUND", (0, 0), (-1, 0), colors.lightgrey),
-                                ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
-                                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-                            ]))
-                            pdf.build([table])
-                            print(f"Exported PDF to {args.export_pdf}")
-                        except Exception as e:
-                            print(f"PDF export failed: {e}")
-                else:
-                    app.display_dashboard()
-                sys.exit(0)
+        _run_write_flow(app, args, symbols)
+        return 0
 
-            _run_write_flow(app, args, symbols)
-        
-        finally:
-            app.close()
-            if purge_mock_after and args.data_source == "mock":
-                app.purge_database_file()
+    finally:
+        app.close()
+        if purge_mock_after and args.data_source == "mock":
+            app.purge_database_file()
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

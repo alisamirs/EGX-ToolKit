@@ -43,7 +43,9 @@ def sync_symbols_from_tradingview(config_symbols: Iterable[str], out_csv: Path |
     try:
         from tradingview_screener import Query
     except Exception as e:
-        raise RuntimeError(f"tradingview-screener not available: {e}") from e
+        raise RuntimeError(
+            f"tradingview-screener not available: {e}. Install with: pip install \"egx-toolkit[sync]\""
+        ) from e
 
     out_csv = out_csv or SYMBOLS_CACHE_PATH
 

@@ -2,10 +2,17 @@
 
 import os
 from pathlib import Path
+from platformdirs import user_data_dir
 
 # Project directories
 PROJECT_ROOT = Path(__file__).parent
-DATA_DIR = PROJECT_ROOT / "data"
+
+_env_data_dir = os.environ.get("EGX_DATA_DIR")
+if _env_data_dir:
+    DATA_DIR = Path(_env_data_dir)
+else:
+    DATA_DIR = Path(user_data_dir("egx-toolkit"))
+
 DB_PATH = DATA_DIR / "stocks.duckdb"
 
 # Create directories if they don't exist
