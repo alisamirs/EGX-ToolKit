@@ -40,15 +40,6 @@ If you want PDF export, install the optional dependency:
 ```bash
 pip install "egx-toolkit[pdf]"
 ```
-
-To enable TradingView symbol sync and the Streamlit dashboard:
-
-```bash
-pip install "egx-toolkit[ui]"
-pip install "egx-toolkit[sync]"
-```
-
-
 ## Configuration
 
 Edit `config.py` to customize:
