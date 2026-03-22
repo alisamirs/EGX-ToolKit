@@ -8,16 +8,16 @@ A comprehensive Python-based trading strategy analysis system for Egyptian Stock
 
 ```
 EGX ToolKit/
-â”œâ”€â”€ config.py              # Configuration and constants
-â”œâ”€â”€ database.py            # DuckDB operations and data persistence
-â”œâ”€â”€ data_fetcher.py        # Data fetching from external sources
-â”œâ”€â”€ strategies.py          # Trading strategy implementations
-â”œâ”€â”€ analysis.py            # Signal aggregation and market analysis
-â”œâ”€â”€ app.py                 # Main CLI application
-â”œâ”€â”€ dashboard.py           # Streamlit web dashboard
-â”œâ”€â”€ requirements.txt       # Python dependencies
-â””â”€â”€ data/                  # Data directory (created at runtime)
-    â””â”€â”€ stocks.duckdb      # Local DuckDB database file
+|-- config.py              # Configuration and constants
+|-- database.py            # DuckDB operations and data persistence
+|-- data_fetcher.py        # Data fetching from external sources
+|-- strategies.py          # Trading strategy implementations
+|-- analysis.py            # Signal aggregation and market analysis
+|-- app.py                 # Main CLI application
+|-- dashboard.py           # Streamlit web dashboard
+|-- requirements.txt       # Python dependencies
+`-- data/                  # Data directory (created at runtime)
+    `-- stocks.duckdb      # Local DuckDB database file
 ```
 
 ## Installation
