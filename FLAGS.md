@@ -59,14 +59,14 @@ List all tradeable EGX symbols (from cached list if present, otherwise fallback 
 `--latest-table`
 Print latest data table (High, Low, Close, Buy/Sell, Strategies, Confidence, Advice) and exit.
 
-`--export-csv PATH`
-Export the latest table to CSV at the given path.
+`--export-csv [PATH]`
+Export the latest table to CSV. If PATH is omitted, writes `Untitled.csv` in the current directory.
 
-`--export-excel PATH`
-Export the latest table to Excel (.xlsx) at the given path.
+`--export-excel [PATH]`
+Export the latest table to Excel (.xlsx). If PATH is omitted, writes `Untitled.xlsx` in the current directory.
 
-`--export-pdf PATH`
-Export the latest table to PDF at the given path (requires `reportlab`).
+`--export-pdf [PATH]`
+Export the latest table to PDF (requires `reportlab`). If PATH is omitted, writes `Untitled.pdf` in the current directory.
 
 ## Examples
 
@@ -90,3 +90,6 @@ python app.py --sync-symbols-tv
 `--purge-mock-after`
 Delete the mock database file after the run (mock data source only).  
 Note: mock runs auto-purge even without this flag.
+
+`--update`
+Update the CLI to the latest version from the git repo and exit.

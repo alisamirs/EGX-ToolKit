@@ -203,15 +203,3 @@ strategies = {
 
 See `EGX_SYMBOLS` in config.py for complete list.
 
-## Future Enhancements
-
-- [ ] Real-time data streaming
-- [ ] Machine learning signal validation
-- [ ] Portfolio optimization
-- [ ] Risk management overlays
-- [ ] Mobile app integration
-- [ ] Email/SMS notifications
-
-## Support
-
-For issues or questions, refer to AppPlan.md for architecture details.

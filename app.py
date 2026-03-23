@@ -2,6 +2,8 @@
 
 __version__ = "1.0.0"
 __about__ = "EGX ToolKit - EGX Trading Strategy Analysis System"
+_DEFAULT_REPO_URL = "https://github.com/alisamirs/EGX-ToolKit.git"
+_SKIP_UPDATE_CHECK_ENV = "EGX_TOOLKIT_SKIP_UPDATE_CHECK"
 
 from datetime import datetime
 import argparse
@@ -10,6 +12,9 @@ import concurrent.futures
 from pathlib import Path
 import shutil
 import os
+import subprocess
+import json
+import importlib.metadata as metadata
 from database import StockDatabase, WriterLock
 from data_fetcher import MockDataFetcher, TVDataFeedFetcher, CachedDataFetcher
 from strategies import (
@@ -389,6 +394,11 @@ def _parse_args(argv=None):
         help="Open the database in read-only mode (no writes)."
     )
     parser.add_argument(
+        "--update",
+        action="store_true",
+        help="Update the CLI to the latest version from the git repo and exit."
+    )
+    parser.add_argument(
         "--backup-db",
         action="store_true",
         help="Create a timestamped backup of the database before running the pipeline."
@@ -427,19 +437,22 @@ def _parse_args(argv=None):
     )
     parser.add_argument(
         "--export-csv",
-        type=str,
+        nargs="?",
+        const="Untitled.csv",
         default=None,
         help="Export latest table to CSV at the given path."
     )
     parser.add_argument(
         "--export-excel",
-        type=str,
+        nargs="?",
+        const="Untitled.xlsx",
         default=None,
         help="Export latest table to Excel (.xlsx) at the given path."
     )
     parser.add_argument(
         "--export-pdf",
-        type=str,
+        nargs="?",
+        const="Untitled.pdf",
         default=None,
         help="Export latest table to PDF at the given path (requires reportlab)."
     )
@@ -471,6 +484,103 @@ def _parse_args(argv=None):
         help="Delete the mock database file after the run (mock data source only)."
     )
     return parser.parse_args(argv)
+
+
+def _get_installed_repo_info():
+    """Return (repo_url, commit_id, editable)."""
+    try:
+        dist = metadata.distribution("egx-toolkit")
+        direct = dist.read_text("direct_url.json")
+        if not direct:
+            return None, None, False
+        info = json.loads(direct)
+        editable = bool(info.get("dir_info", {}).get("editable"))
+        url = info.get("url")
+        commit_id = info.get("vcs_info", {}).get("commit_id")
+        return url, commit_id, editable
+    except Exception:
+        return None, None, False
+
+
+def _normalize_repo_url(url):
+    if not url:
+        return None
+    if url.startswith("git+"):
+        return url
+    return f"git+{url}"
+
+
+def _get_remote_head_commit(repo_url):
+    if not repo_url:
+        return None
+    plain = repo_url[4:] if repo_url.startswith("git+") else repo_url
+    try:
+        result = subprocess.run(
+            ["git", "ls-remote", plain, "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        if result.returncode != 0:
+            return None
+        line = result.stdout.strip().splitlines()
+        if not line:
+            return None
+        return line[0].split()[0]
+    except Exception:
+        return None
+
+
+def _maybe_check_updates(args):
+    if os.environ.get(_SKIP_UPDATE_CHECK_ENV):
+        return
+    # Skip check when explicitly updating
+    if args.update:
+        return
+
+    url, commit_id, editable = _get_installed_repo_info()
+    if editable:
+        return
+
+    repo_url = _normalize_repo_url(url) or _normalize_repo_url(_DEFAULT_REPO_URL)
+    remote = _get_remote_head_commit(repo_url)
+    if not remote or not commit_id:
+        return
+    if remote != commit_id:
+        print("Update available. Run: egx-toolkit --update")
+
+
+def _run_update_and_exit():
+    repo_url, _commit, editable = _get_installed_repo_info()
+    if editable:
+        print("Editable install detected; update skipped.")
+        return 0
+    repo_url = _normalize_repo_url(repo_url) or _normalize_repo_url(_DEFAULT_REPO_URL)
+    if not repo_url:
+        print("Update failed: could not determine repo URL.")
+        return 1
+    print("Updating in the background...")
+    cmd = [sys.executable, "-m", "pip", "install", "--upgrade", repo_url]
+    if os.name == "nt":
+        # Delay to allow this process to exit and release egx-toolkit.exe
+        wait_cmd = f"timeout /t 2 /nobreak >nul & \"{sys.executable}\" -m pip install --upgrade {repo_url}"
+        subprocess.Popen(["cmd", "/c", wait_cmd], creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+    else:
+        subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return 0
+
+
+def _resolve_export_path(path_value, kind):
+    if not path_value:
+        return None
+    # If user provided a directory, place Untitled.<ext> inside it.
+    p = Path(path_value)
+    ext = {"csv": ".csv", "excel": ".xlsx", "pdf": ".pdf"}[kind]
+    if p.exists() and p.is_dir():
+        return str(p / f"Untitled{ext}")
+    if p.suffix.lower() != ext:
+        return str(p.with_suffix(ext))
+    return str(p)
 
 
 def _backup_database_file(db_path):
@@ -573,12 +683,14 @@ def _run_write_flow(app, args, symbols):
         df = app.display_latest_table()
 
         if args.export_csv:
-            df.to_csv(args.export_csv, index=False)
-            print(f"Exported CSV to {args.export_csv}")
+            csv_path = _resolve_export_path(args.export_csv, "csv")
+            df.to_csv(csv_path, index=False)
+            print(f"Exported CSV to {csv_path}")
 
         if args.export_excel:
-            df.to_excel(args.export_excel, index=False)
-            print(f"Exported Excel to {args.export_excel}")
+            xlsx_path = _resolve_export_path(args.export_excel, "excel")
+            df.to_excel(xlsx_path, index=False)
+            print(f"Exported Excel to {xlsx_path}")
 
         if args.export_pdf:
             try:
@@ -586,7 +698,8 @@ def _run_write_flow(app, args, symbols):
                 from reportlab.lib.pagesizes import letter, landscape
                 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 
-                pdf = SimpleDocTemplate(args.export_pdf, pagesize=landscape(letter))
+                pdf_path = _resolve_export_path(args.export_pdf, "pdf")
+                pdf = SimpleDocTemplate(pdf_path, pagesize=landscape(letter))
                 data = [df.columns.tolist()] + df.astype(str).values.tolist()
                 table = Table(data)
                 table.setStyle(TableStyle([
@@ -595,7 +708,7 @@ def _run_write_flow(app, args, symbols):
                     ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
                 ]))
                 pdf.build([table])
-                print(f"Exported PDF to {args.export_pdf}")
+                print(f"Exported PDF to {pdf_path}")
             except Exception as e:
                 print(f"PDF export failed: {e}")
     else:
@@ -611,6 +724,10 @@ def main(argv=None):
         return 0
 
     args, _unknown = _parse_args(argv), None
+    _maybe_check_updates(args)
+    if args.update:
+        return _run_update_and_exit()
+
     if args.version:
         print(__version__)
         return 0
@@ -704,24 +821,30 @@ def main(argv=None):
             )
         else:
             raise
+    # Ensure symbol filtering is respected even in read-only flows.
+    if symbols is not None:
+        app.last_symbols = symbols
 
     try:
         if args.read_only:
             if args.latest_table or args.export_csv or args.export_excel or args.export_pdf:
                 df = app.display_latest_table()
                 if args.export_csv:
-                    df.to_csv(args.export_csv, index=False)
-                    print(f"Exported CSV to {args.export_csv}")
+                    csv_path = _resolve_export_path(args.export_csv, "csv")
+                    df.to_csv(csv_path, index=False)
+                    print(f"Exported CSV to {csv_path}")
                 if args.export_excel:
-                    df.to_excel(args.export_excel, index=False)
-                    print(f"Exported Excel to {args.export_excel}")
+                    xlsx_path = _resolve_export_path(args.export_excel, "excel")
+                    df.to_excel(xlsx_path, index=False)
+                    print(f"Exported Excel to {xlsx_path}")
                 if args.export_pdf:
                     try:
                         from reportlab.lib import colors
                         from reportlab.lib.pagesizes import letter, landscape
                         from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 
-                        pdf = SimpleDocTemplate(args.export_pdf, pagesize=landscape(letter))
+                        pdf_path = _resolve_export_path(args.export_pdf, "pdf")
+                        pdf = SimpleDocTemplate(pdf_path, pagesize=landscape(letter))
                         data = [df.columns.tolist()] + df.astype(str).values.tolist()
                         table = Table(data)
                         table.setStyle(TableStyle([
@@ -730,7 +853,7 @@ def main(argv=None):
                             ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
                         ]))
                         pdf.build([table])
-                        print(f"Exported PDF to {args.export_pdf}")
+                        print(f"Exported PDF to {pdf_path}")
                     except Exception as e:
                         print(f"PDF export failed: {e}")
             else:
